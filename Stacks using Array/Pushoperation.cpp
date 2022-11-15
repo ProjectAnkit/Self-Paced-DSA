@@ -5,7 +5,7 @@ using namespace std;
 class Stack{
 	private:
 	    int top = -1;
-        int stack_arr[MAX];
+            int stack_arr[MAX];
 	public:
 	    void push(int data);
 	    void print();
