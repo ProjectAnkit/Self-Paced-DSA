@@ -3,14 +3,14 @@
 using namespace std;
 
 class Stack{
+	private:
+	    int top = -1;
+        int stack_arr[MAX];
 	public:
 	    void push(int data);
 	    void print();
+	    void pop();
 };
-
-int top = -1;
-int stack_arr[MAX];
-
 
 int main()
 {
@@ -31,13 +31,14 @@ void Stack::push(int data)
 {
 	if(top == MAX-1)
 	{
-		cout<<"stack overflow"<<endl;
+		cout<<"#warning : 'STACK OVERFLOW'"<<endl;
 		return;
 	}
 	
 	top = top+1;
 	stack_arr[top] = data;
 }
+
 
 void Stack::print()
 {
