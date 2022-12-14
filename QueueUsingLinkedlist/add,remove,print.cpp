@@ -54,6 +54,7 @@ void Queue::print()
 
 int main()
 {
+    
     Queue q;
     q.insert(5);
     q.insert(7);
@@ -65,4 +66,5 @@ int main()
     q.deletion();
     q.print();
     return 0;
+    
 }
