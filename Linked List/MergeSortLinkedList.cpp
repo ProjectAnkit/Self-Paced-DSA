@@ -6,7 +6,6 @@ class Node{
     private:
        int data;
        Node *next;
-       Node *prev;
 
     public:
        void insert(int x);
@@ -14,13 +13,14 @@ class Node{
        int Size(Node*head,Node*head1);
        void createlist();
        void createlist1();
-       void mergelist(Node*head,Node*head1);
+       void mergelist(Node*head,Node*head1,Node*head2);
        void print();
        void print1();
 };
 
        Node *head=NULL;
        Node *head1=NULL;
+       Node *head2=NULL;
        
 
 void Node::insert(int x)
@@ -32,7 +32,6 @@ void Node::insert(int x)
     if(head==NULL)
     {
         head = temp;
-        head->prev = NULL;
     }
     else
     {
@@ -42,7 +41,6 @@ void Node::insert(int x)
             temp1 = temp1->next;
         }
         temp1->next = temp;
-        temp->prev = temp1;
     }
 }
 
@@ -55,7 +53,6 @@ void Node::insert1(int x)
     if(head1==NULL)
     {
         head1 = temp;
-        head1->prev = NULL;
     }
     else
     {
@@ -65,7 +62,6 @@ void Node::insert1(int x)
             temp1 = temp1->next;
         }
         temp1->next = temp;
-        temp->prev = temp1;
     }
 }
 
@@ -86,24 +82,24 @@ int Node::Size(Node*head,Node*head1){
     return count;
 }
 
-void Node::mergelist(Node*head,Node*head1){
-    
-    Node *head2=NULL;
+void Node::mergelist(Node*head,Node*head1,Node*head2){
     
     Node *temp = head;
+    Node *front = temp->next;
     Node *temp1 = head1;
-    Node *temp3 = head2;
-    
+    Node *front1 = temp1->next;
+
     int count = Size(head,head1);
     
     while(count>0)
     {
+    	Node *temp3 = head2;
         if(temp->data<temp1->data)
         {
             if(head2==NULL)
             {
-                temp = temp->next;
-                head2 = temp->prev;
+                head2 = temp;
+                temp = front;
                 --count;
             }
             else
@@ -121,8 +117,8 @@ void Node::mergelist(Node*head,Node*head1){
         {
             if(head2==NULL)
             {
-                temp1 = temp1->next;
-                head2 = temp1->prev;
+                head2 = temp1;
+                temp1 = front1;
                 --count;
             }
             else
@@ -137,8 +133,7 @@ void Node::mergelist(Node*head,Node*head1){
             }
         }
     }
-    
-    *head = *head2;
+    head = head2;
 }
 
 void Node::print(){
@@ -204,7 +199,7 @@ int main()
     Node list;
     list.createlist();
     list.createlist1();
-    list.mergelist(head,head1);
+    list.mergelist(head,head1,head2);
     cout<<"\n"<<"Final Sorted List is:";
     list.print();
    return 0; 
